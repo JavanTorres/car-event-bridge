@@ -1,0 +1,9 @@
+. "$(dirname -- "$0")/_/husky.sh"
+
+pnpm run lint-staged || exit 1
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.js' '*.jsx' '*.tsx' || true)
+
+if [ -n "$STAGED" ]; then
+  pnpm run test:related -- $STAGED || exit 1
+fi
