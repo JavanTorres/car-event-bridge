@@ -1,5 +1,3 @@
-. "$(dirname "$0")/_/husky.sh"
-
 pnpm run test || {
   echo "\n🚫 Erro: alguns testes falharam. Corrija-os antes de dar push.\n"
   exit 1
