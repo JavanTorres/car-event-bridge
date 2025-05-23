@@ -1,4 +1,10 @@
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpStatus,
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -16,6 +22,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.enableCors({ origin: '*' });
+
   const port = Number(process.env.PORT) || 3000;
 
   app.enableCors();
@@ -32,6 +40,16 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
+      exceptionFactory(errors) {
+        const messages = errors
+          .map((err) => Object.values(err.constraints || {}))
+          .flat();
+        return new BadRequestException({
+          statusCode: HttpStatus.BAD_REQUEST,
+          error: 'Erro de validação',
+          message: messages,
+        });
+      },
     }),
   );
 

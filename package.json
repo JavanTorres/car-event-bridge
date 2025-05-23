@@ -22,7 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
     "lint-staged": "lint-staged",
-    "test:related": "jest --bail --findRelatedTests",
+    "test:related": "jest --bail --findRelatedTests --passWithNoTests",
     "commitlint": "commitlint --from=origin/main --to=HEAD"
   },
   "lint-staged": {
