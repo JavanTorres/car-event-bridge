@@ -26,8 +26,6 @@ async function bootstrap() {
 
   const port = Number(process.env.PORT) || 3000;
 
-  app.enableCors();
-
   app.enableVersioning({
     type: VersioningType.URI,
   });

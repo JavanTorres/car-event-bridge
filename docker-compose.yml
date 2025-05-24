@@ -33,7 +33,7 @@ services:
       - "8080:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: kraft-cluster
-      KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: kafka:9092,host.docker.internal:9092
     networks:
       - default
 
@@ -41,6 +41,8 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: on-failure
+    ports:
+      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: mymongoadmin
       MONGO_INITDB_ROOT_PASSWORD: mymongopassword
@@ -75,11 +77,17 @@ services:
       - kafka-ui
       - mongodb
       - mongo-express
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env.docker
     environment:
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=100
-      - KAFKA_BROKERS=kafka:9092
+      # aqui remova qualquer localhost:9092 — só kafka e host.docker.internal
+      - KAFKA_BROKERS=kafka:9092,host.docker.internal:9092
       - KAFKA_CONSUMER_GROUP_ID=javan-group
+      - KAFKAJS_NO_PARTITIONER_WARNING=1
       - NODE_ENV=development
       - MONGO_URI=mongodb://mymongoadmin:mymongopassword@mongodb:27017/mydb?authSource=admin
     ports:
