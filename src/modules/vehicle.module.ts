@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { CreateVehicleUseCase } from '@application/usecases/create-vehicle.usecase';
+import { DeleteVehicleByIdUseCase } from '@application/usecases/delete-vehicle-by-id.usecase';
+import { FindAllVehiclesUseCase } from '@application/usecases/find-all-vehicles.usecase';
+import { FindVehicleByIdUseCase } from '@application/usecases/find-vehicle-by-id.usecase';
+import { UpdateVehicleUseCase } from '@application/usecases/update-vehicle.usecase';
 import { VehicleRepositoryContract } from '@domain/entities/repositories/vehicle.repository.contract';
 import { VehicleRepositoryImpl } from '@infrastructure/database/vehicle.repository.impl';
 import { VehiclesController } from '@presentation/controllers/vehicles.controller';
@@ -15,6 +19,10 @@ import { MongodbModule } from './mongodb.module';
   providers: [
     VehicleService,
     CreateVehicleUseCase,
+    FindAllVehiclesUseCase,
+    FindVehicleByIdUseCase,
+    DeleteVehicleByIdUseCase,
+    UpdateVehicleUseCase,
     { provide: VehicleRepositoryContract, useClass: VehicleRepositoryImpl },
   ],
 })
