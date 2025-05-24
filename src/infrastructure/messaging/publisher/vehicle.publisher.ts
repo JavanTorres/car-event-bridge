@@ -34,10 +34,11 @@ export class VehiclePublisher
     await this.producer.connect();
   }
 
-  async publish(vehicle: Vehicle): Promise<void> {
+  async publish(action: string, vehicle: Vehicle): Promise<void> {
+    const value = JSON.stringify({ action, payload: vehicle });
     await this.producer.send({
       topic: 'vehicle.log',
-      messages: [{ key: vehicle.uuid, value: JSON.stringify(vehicle) }],
+      messages: [{ key: vehicle.uuid, value }],
     });
   }
 }

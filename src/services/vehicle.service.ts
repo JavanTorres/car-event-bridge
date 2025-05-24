@@ -16,7 +16,10 @@ export class VehicleService {
 
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
     const vehicle = await this.createVehicleUseCase.execute(createVehicleDto);
-    await this.vehiclePublisher.publish(vehicle);
+    await this.vehiclePublisher.publish(
+      `${VehicleService.name}_create`,
+      vehicle,
+    );
     return vehicle;
   }
 }
