@@ -29,10 +29,14 @@
 
 ## UIs
 
-* **Interface da base de dados:**
-  [http://localhost:8081/db/mydb/](http://localhost:8081/db/mydb/)
+**Interface da base de dados:**
+[Acesse a UI do banco](http://localhost:8081/db/mydb/)
 * **Interface do Kafka:**
-  [http://localhost:8080/ui/clusters/kraft-cluster/all-topics](http://localhost:8080/ui/clusters/kraft-cluster/all-topics)
+  [Acesse a UI do Kafka](http://localhost:8080/ui/clusters/kraft-cluster/all-topics)
+* **Swagger (API Documentation):**
+  [Acesse a documentação Swagger](http://localhost:3000/api-docs-v1)
+
+  > Aqui você encontra a interface do Swagger para visualização e teste das rotas da API.
 
 ## Pontos Importantes
 
